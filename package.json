@@ -1,12 +1,20 @@
 {
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/programGitHub/editor/settings"
+  },
   "name": "editor",
   "version": "0.1.0",
-  "dependencies": {
-    "babel-cli": "^6.26.0"
-  },
+  "dependencies": {},
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
+    "build": "rimraf dist && cross-env NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -26,8 +34,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
     "@material-ui/core": "^4.7.0",
     "@material-ui/icons": "^4.5.1",
+    "cross-env": "^6.0.3",
     "immutable": "^4.0.0-rc.12",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -40,5 +51,6 @@
     "slate": "^0.47.8",
     "slate-react": "^0.22.9",
     "typeface-roboto": "^0.0.75"
-  }
+  },
+  "license": "MIT"
 }

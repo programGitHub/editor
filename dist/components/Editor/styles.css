@@ -1,0 +1,21 @@
+.custom-enter {
+  transform: translateX(-25px);
+  opacity: 0;
+}
+
+.custom-enter-active {
+  transform: translateX(0px);
+  transition: opacity 300ms, transform 200ms ease-in-out;
+  opacity: 1;
+}
+
+.custom-exit {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+.custom-exit-active {
+  transform: translateX(-25px);
+  transition: opacity 300ms, transform 200ms ease-in-out;
+  opacity: 0;
+}
