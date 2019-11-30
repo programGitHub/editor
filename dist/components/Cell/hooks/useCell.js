@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import DRAG_TYPE from '../dragType';
 import { useDrag, useDrop } from 'react-dnd';
-import useOver from 'hooks/useOver';
+import useOver from '../../../hooks/useOver';
 export default function useCell({
   id,
   index,

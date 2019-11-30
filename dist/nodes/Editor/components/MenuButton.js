@@ -3,7 +3,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { EditorContext } from './Editor';
-import { MenuItem } from 'components/Cell';
+import { MenuItem } from '../../../components/Cell';
 import Portal from '@material-ui/core/Portal';
 
 function avoidFocusLoss(e) {

@@ -2,7 +2,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 import React, { useRef } from 'react';
 import { Editor as SlateEditor } from 'slate-react';
-import { Menu, MenuBox } from 'components/Cell';
+import { Menu, MenuBox } from '../../../components/Cell';
 import plugins from '../plugins';
 export const EditorContext = React.createContext({
   menu: {}

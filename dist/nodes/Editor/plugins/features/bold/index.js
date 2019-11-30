@@ -1,7 +1,7 @@
 import Button from './components/Button';
 import Mark from './components/Mark';
-import { Command, Query, RenderButton, RenderMark } from 'nodes/Editor/plugins/utils';
-import { hasInlines, wrapInline, unwrapInline } from 'nodes/Editor/plugins/commands';
+import { Command, Query, RenderButton, RenderMark } from '../../nodes/Editor/plugins/utils';
+import { hasInlines, wrapInline, unwrapInline } from '../../nodes/Editor/plugins/commands';
 export default function (options) {
   const {
     menuPos,

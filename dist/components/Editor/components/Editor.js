@@ -4,20 +4,20 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Add from './Add';
 import Box from '@material-ui/core/Box';
-import Cell from 'components/Cell';
+import Cell from '../../components/Cell';
 import { DndProvider } from 'react-dnd';
 import EditorContext from '../context';
-import highlight from 'nodes/Highlight';
+import highlight from '../../../nodes/Highlight';
 import HTML5Backend from 'react-dnd-html5-backend';
-import image from 'nodes/Image';
+import image from '../../../nodes/Image';
 import Node from './Node';
-import paragraph from 'nodes/Paragraph';
+import paragraph from '../../../nodes/Paragraph';
 import Toolbar from './Toolbar';
 import Transition from './Transition';
 import { TransitionGroup } from 'react-transition-group';
 import useEditor from '../hooks/useEditor';
 import { Value } from 'slate';
-import Viewer from 'components/Viewer';
+import Viewer from '../../components/Viewer';
 const initialNodes = [{
   id: 2,
   value: Value.fromJSON({

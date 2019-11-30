@@ -1,6 +1,56 @@
 const fs = require('fs');
 const pathModule = require('path');
 
+let mainDirs = [];
+
+/**
+ * isMainDir
+ * @param {String} name
+ */
+function isMainDir(name) {
+  return mainDirs.some(dir => dir === name);
+}
+
+/**
+ * setMainDirs
+ * @param {String} path
+ */
+function setMainDirs(path) {
+  const result = fs.readdirSync(path, { withFileTypes: true });
+
+  mainDirs = result
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
+}
+
+/**
+ * makeRelativeStr
+ * @param {Number} depth
+ */
+function makeRelativeStr(currentPath) {
+  const arr = currentPath.split('\\').slice(1); // slice 1 à cause du premier dist/
+
+  return function(_, importPath) {
+    const arrCurrent = [...arr];
+    const arrImport = importPath.split('/');
+
+    if (!isMainDir(arrImport[0])) {
+      return `from '${importPath}'`;
+    }
+
+    while (
+      arrImport.length &&
+      arrCurrent.length &&
+      arrImport.shift() === arrCurrent.shift()
+    ) {}
+
+    const depth = arrCurrent.length,
+      filler = new Array(depth).fill('..').join('/');
+
+    return `from '${filler}/${importPath}'`;
+  };
+}
+
 /**
  * isRootDirectoryValid
  * @param {String} path
@@ -25,6 +75,7 @@ function isRootDirectoryValid(path) {
  */
 function processDir(path, ...args) {
   console.log(`\\${path}`);
+
   const result = fs.readdirSync(path, { withFileTypes: true });
 
   const directories = result.filter(dirent => dirent.isDirectory()),
@@ -49,7 +100,9 @@ function processFile(path, pattern, replace) {
   const data = fs.readFileSync(fdR, 'utf8');
   fs.closeSync(fdR);
 
-  const result = data.replace(pattern, replace);
+  const result = data
+    .replace(pattern, replace)
+    .replace(/from '([\w\/@\-]+)'/g, makeRelativeStr(path));
 
   const fdW = fs.openSync(path, 'w');
   fs.writeFileSync(fdW, result, 'utf8');
@@ -62,8 +115,8 @@ function processFile(path, pattern, replace) {
  */
 function run(path, ...args) {
   try {
+    setMainDirs(path);
     isRootDirectoryValid(path);
-
     processDir(path, ...args);
   } catch (e) {
     console.log(e);

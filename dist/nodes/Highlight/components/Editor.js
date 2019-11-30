@@ -4,8 +4,8 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import colors from '../colors';
 import Highlight from './Highlight';
 import InfoIcon from '@material-ui/icons/Info';
-import { Menu, MenuBox, MenuItem } from 'components/Cell';
-import RichEditor from 'nodes/Editor';
+import { Menu, MenuBox, MenuItem } from '../../../components/Cell';
+import RichEditor from '../../nodes/Editor';
 import WarningIcon from '@material-ui/icons/Warning';
 /**
  * Editor
