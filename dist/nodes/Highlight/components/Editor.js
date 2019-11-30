@@ -5,7 +5,7 @@ import colors from '../colors';
 import Highlight from './Highlight';
 import InfoIcon from '@material-ui/icons/Info';
 import { Menu, MenuBox, MenuItem } from '../../../components/Cell';
-import RichEditor from '../../nodes/Editor';
+import RichEditor from '../../Editor';
 import WarningIcon from '@material-ui/icons/Warning';
 /**
  * Editor

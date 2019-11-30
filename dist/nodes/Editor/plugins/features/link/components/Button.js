@@ -3,7 +3,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 import React from 'react';
 import PropTypes from 'prop-types';
 import LinkIcon from '@material-ui/icons/Link';
-import { MenuButton } from '../../../../../nodes/Editor';
+import { MenuButton } from '../../../../../Editor';
 /**
  * Button
  */

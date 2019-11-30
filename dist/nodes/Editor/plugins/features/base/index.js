@@ -1,5 +1,5 @@
 import ParagraphBlock from './components/ParagraphBlock';
-import { RenderBlock } from '../../nodes/Editor/plugins/utils';
+import { RenderBlock } from '../../utils';
 export default function (options) {
   const {
     type

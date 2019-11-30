@@ -38,16 +38,18 @@ function makeRelativeStr(currentPath) {
       return `from '${importPath}'`;
     }
 
-    while (
-      arrImport.length &&
-      arrCurrent.length &&
-      arrImport.shift() === arrCurrent.shift()
-    ) {}
+    while (arrImport.length > 1 && arrCurrent.length) {
+      if (arrImport[0] !== arrCurrent[0]) {
+        break;
+      }
 
-    const depth = arrCurrent.length,
+      arrImport.shift() === arrCurrent.shift();
+    }
+
+    const depth = arrCurrent.length - 1,
       filler = new Array(depth).fill('..').join('/');
 
-    return `from '${filler}/${importPath}'`;
+    return `from '${filler}/${arrImport.join('/')}'`;
   };
 }
 

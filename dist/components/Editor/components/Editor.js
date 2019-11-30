@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Add from './Add';
 import Box from '@material-ui/core/Box';
-import Cell from '../../components/Cell';
+import Cell from '../../Cell';
 import { DndProvider } from 'react-dnd';
 import EditorContext from '../context';
 import highlight from '../../../nodes/Highlight';
@@ -17,7 +17,7 @@ import Transition from './Transition';
 import { TransitionGroup } from 'react-transition-group';
 import useEditor from '../hooks/useEditor';
 import { Value } from 'slate';
-import Viewer from '../../components/Viewer';
+import Viewer from '../../Viewer';
 const initialNodes = [{
   id: 2,
   value: Value.fromJSON({

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 import DoneIcon from '@material-ui/icons/Done';
 import IconButton from '@material-ui/core/IconButton';
-import { Popover } from '../../../../../nodes/Editor';
+import { Popover } from '../../../../../Editor';
 import TextField from '@material-ui/core/TextField';
 /**
  * Update
