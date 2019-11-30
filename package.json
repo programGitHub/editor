@@ -11,7 +11,22 @@
   },
   "name": "editor",
   "version": "0.1.0",
-  "dependencies": {},
+  "dependencies": {
+    "@material-ui/core": "^4.7.0",
+    "@material-ui/icons": "^4.5.1",
+    "immutable": "^4.0.0-rc.12",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dnd": "^9.5.1",
+    "react-dnd-html5-backend": "^9.5.1",
+    "react-dom": "^16.12.0",
+    "react-katex": "^2.0.2",
+    "react-scripts": "3.2.0",
+    "react-transition-group": "^4.3.0",
+    "slate": "^0.47.8",
+    "slate-react": "^0.22.9",
+    "typeface-roboto": "^0.0.75"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "rimraf dist && cross-env NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__ && npm run manageImports",
@@ -37,21 +52,7 @@
   "devDependencies": {
     "@babel/cli": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
-    "@material-ui/core": "^4.7.0",
-    "@material-ui/icons": "^4.5.1",
-    "cross-env": "^6.0.3",
-    "immutable": "^4.0.0-rc.12",
-    "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dnd": "^9.5.1",
-    "react-dnd-html5-backend": "^9.5.1",
-    "react-dom": "^16.12.0",
-    "react-katex": "^2.0.2",
-    "react-scripts": "3.2.0",
-    "react-transition-group": "^4.3.0",
-    "slate": "^0.47.8",
-    "slate-react": "^0.22.9",
-    "typeface-roboto": "^0.0.75"
+    "cross-env": "^6.0.3"
   },
   "license": "MIT"
 }
