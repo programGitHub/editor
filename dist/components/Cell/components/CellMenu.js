@@ -11,7 +11,7 @@ import Menu from './Menu';
 import MenuBox from './MenuBox';
 import MenuItem from './MenuItem';
 import MenuBorder from './MenuBorder';
-import useHold from 'lib/hooks/useHold';
+import useHold from 'hooks/useHold';
 /**
  * CellMenu
  */

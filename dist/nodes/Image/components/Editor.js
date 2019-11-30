@@ -5,7 +5,7 @@ import FormatCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import FormatLeftIcon from '@material-ui/icons/FormatAlignLeft';
 import FormatRightIcon from '@material-ui/icons/FormatAlignRight';
 import { makeStyles } from '@material-ui/core/styles';
-import { Menu, MenuBox, MenuItem } from 'lib/components/Cell';
+import { Menu, MenuBox, MenuItem } from 'components/Cell';
 import Slider from './Slider';
 import TextField from './TextField';
 import Viewer from './Viewer';

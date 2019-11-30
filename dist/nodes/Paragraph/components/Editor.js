@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RichEditor from 'lib/nodes/Editor';
+import RichEditor from 'nodes/Editor';
 /**
  * Editor
  */

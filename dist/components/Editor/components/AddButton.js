@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import useEditorContext from '../hooks/useEditorContext';
-import useOver from 'lib/hooks/useOver';
+import useOver from 'hooks/useOver';
 import Zoom from '@material-ui/core/Zoom';
 const useStyles = makeStyles(theme => ({
   button: {
