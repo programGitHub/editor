@@ -8,18 +8,18 @@ import SaveButton from './SaveButton';
 /**
  * Toolbar
  */
-const Toolbar = ({ onSave, preview, setPreview }) => (
+const Toolbar = ({ onPreviewChange, onSave, preview }) => (
   <MuiToolbar disableGutters variant="dense">
     <SaveButton onClick={onSave} />
     <Box flex={1} />
-    <EditButton in={!preview} onChange={setPreview} />
+    <EditButton in={!preview} onChange={onPreviewChange} />
   </MuiToolbar>
 );
 
 Toolbar.propTypes = {
+  onPreviewChange: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
-  preview: PropTypes.bool.isRequired,
-  setPreview: PropTypes.func.isRequired
+  preview: PropTypes.bool.isRequired
 };
 
 export default Toolbar;

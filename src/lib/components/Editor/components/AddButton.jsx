@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import Box from '@material-ui/core/Box';
 import clsx from 'clsx';
+import { EditorContext } from './Editor';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
-import useEditorContext from '../hooks/useEditorContext';
 import useOver from 'lib/hooks/useOver';
 import Zoom from '@material-ui/core/Zoom';
 
@@ -28,10 +28,10 @@ const useStyles = makeStyles(theme => ({
 const AddButton = ({ onClick }) => {
   const classes = useStyles();
   const [over, onMouseEnter, onMouseLeave] = useOver();
-  const { plugins } = useEditorContext();
+  const { plugins } = useContext(EditorContext);
 
-  const actions = Object.keys(plugins)
-    .map(key => plugins[key])
+  const actions = plugins
+    .map(({ plugin }) => plugin)
     .filter(plugin => Object.hasOwnProperty.call(plugin, 'menu'))
     .map(plugin => ({
       defaultProps: plugin.defaultProps || {},

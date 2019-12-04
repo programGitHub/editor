@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import useEditorContext from '../hooks/useEditorContext';
+import { EditorContext } from './Editor';
 /**
  * Node
  */
@@ -12,22 +12,36 @@ const Node = ({
 }) => {
   const {
     plugins
-  } = useEditorContext();
+  } = useContext(EditorContext);
 
-  if (typeof plugins !== 'object' || !Object.hasOwnProperty.call(plugins, type)) {
+  if (typeof plugins !== 'object' || !Array.isArray(plugins) || !plugins.some(({
+    type: pluginType
+  }) => pluginType === type)) {
     return null;
   }
 
-  if (active && !Object.hasOwnProperty.call(plugins[type], 'renderEditor')) {
+  const pluginEntry = plugins.find(({
+    type: pluginType
+  }) => pluginType === type);
+
+  if (!Object.hasOwnProperty.call(pluginEntry, 'plugin')) {
     return null;
   }
 
-  if (!Object.hasOwnProperty.call(plugins[type], 'renderViewer')) {
+  const {
+    plugin
+  } = pluginEntry;
+
+  if (active && !Object.hasOwnProperty.call(plugin, 'renderEditor')) {
     return null;
   }
 
-  const Editor = plugins[type].renderEditor,
-        Viewer = plugins[type].renderViewer;
+  if (!Object.hasOwnProperty.call(plugin, 'renderViewer')) {
+    return null;
+  }
+
+  const Editor = plugin.renderEditor,
+        Viewer = plugin.renderViewer;
   return React.createElement(React.Fragment, null, !active && React.createElement(Viewer, props), React.createElement("div", {
     style: {
       display: active ? 'block' : 'none'

@@ -3,17 +3,17 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 import React from 'react';
 import PropTypes from 'prop-types';
 import Block from './Block';
-import ViewerContext from '../context';
+export const ViewerContext = React.createContext([]);
 /**
  * Viewer
  */
 
 const Viewer = ({
-  blocks,
-  plugins
+  plugins,
+  value
 }) => React.createElement(ViewerContext.Provider, {
   value: plugins
-}, blocks.map(({
+}, value.map(({
   id,
   ...blockProps
 }) => React.createElement(Block, _extends({}, blockProps, {
@@ -21,9 +21,9 @@ const Viewer = ({
 }))));
 
 Viewer.propTypes = {
-  blocks: PropTypes.arrayOf(PropTypes.shape({
-    type: PropTypes.string.isRequired
-  })).isRequired,
-  plugins: PropTypes.object.isRequired
+  plugins: PropTypes.array.isRequired,
+  value: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired
+  })).isRequired
 };
 export default Viewer;

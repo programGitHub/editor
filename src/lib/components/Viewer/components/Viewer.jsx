@@ -1,26 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Block from './Block';
-import ViewerContext from '../context';
+
+export const ViewerContext = React.createContext([]);
 
 /**
  * Viewer
  */
-const Viewer = ({ blocks, plugins }) => (
+const Viewer = ({ plugins, value }) => (
   <ViewerContext.Provider value={plugins}>
-    {blocks.map(({ id, ...blockProps }) => (
+    {value.map(({ id, ...blockProps }) => (
       <Block {...blockProps} key={id} />
     ))}
   </ViewerContext.Provider>
 );
 
 Viewer.propTypes = {
-  blocks: PropTypes.arrayOf(
+  plugins: PropTypes.array.isRequired,
+  value: PropTypes.arrayOf(
     PropTypes.shape({
-      type: PropTypes.string.isRequired
+      id: PropTypes.string.isRequired
     })
-  ).isRequired,
-  plugins: PropTypes.object.isRequired
+  ).isRequired
 };
 
 export default Viewer;

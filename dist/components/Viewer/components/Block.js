@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
-import ViewerContext from '../context';
+import { ViewerContext } from './Viewer';
 /**
  * Block
  */
@@ -12,13 +12,32 @@ const Block = ({
 }) => {
   const plugins = useContext(ViewerContext);
 
-  if (typeof plugins !== 'object' || !Object.hasOwnProperty.call(plugins, type)) {
+  if (typeof plugins !== 'object' || !Array.isArray(plugins) || !plugins.some(({
+    type: pluginType
+  }) => pluginType === type)) {
     return null;
   }
 
-  const Viewer = plugins[type].renderViewer;
+  const pluginEntry = plugins.find(({
+    type: pluginType
+  }) => pluginType === type);
+
+  if (!Object.hasOwnProperty.call(pluginEntry, 'plugin')) {
+    return null;
+  }
+
+  const {
+    plugin
+  } = pluginEntry;
+
+  if (!Object.hasOwnProperty.call(plugin, 'renderViewer')) {
+    return null;
+  }
+
+  const Viewer = plugin.renderViewer;
   return React.createElement(Box, {
-    marginBottom: 2
+    marginBottom: 2,
+    marginTop: 2
   }, React.createElement(Viewer, props));
 };
 

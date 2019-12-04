@@ -1,106 +1,109 @@
-import { useCallback, useReducer } from 'react';
+import { useCallback, useState } from 'react';
+import shortid from 'shortid';
+/**
+ * addNode
+ *
+ * @param {Function} cb
+ * @param {Array} currentNodes
+ */
 
-function createInitialState(initialNodes) {
-  return {
-    active: null,
-    nodes: [...initialNodes]
-  };
-}
+function addNode(cb, currentNodes) {
+  return function (index) {
+    return function (nodeProps) {
+      return function () {
+        const nodes = [...currentNodes],
+              id = shortid.generate(),
+              node = { ...nodeProps,
+          id
+        };
 
-function reducer(state, action) {
-  switch (action.type) {
-    case 'active':
-      return { ...state,
-        active: action.active
+        if (typeof index === 'number') {
+          nodes.splice(index + 1, 0, node);
+        } else {
+          nodes.unshift(node);
+        }
+
+        cb(nodes);
       };
-
-    case 'nodes':
-      return { ...state,
-        nodes: action.nodes
-      };
-
-    default:
-      return { ...state
-      };
-  }
-}
-
-export default function useEditor(initialNodes = []) {
-  const [state, dispatch] = useReducer(reducer, createInitialState(initialNodes));
-  const add = useCallback(index => nodeProps => () => {
-    const nodes = [...state.nodes],
-          id = nodes.reduce((stack, curr) => Math.max(stack, curr.id), 0) + 1,
-          node = { ...nodeProps,
-      id
     };
-
-    if (typeof index !== 'undefined') {
-      nodes.splice(index + 1, 0, node);
-    } else {
-      nodes.unshift(node);
-    }
-
-    dispatch({
-      nodes,
-      type: 'nodes'
-    });
-  }, [state.nodes]);
-
-  const handleActive = id => () => {
-    dispatch({
-      active: id,
-      type: 'active'
-    });
   };
+}
+/**
+ * updateNode
+ *
+ * @param {Function} cb
+ * @param {Array} currentNodes
+ */
 
-  const handleNodeChange = id => value => {
-    const nodes = state.nodes.map(node => {
-      if (node.id !== id) {
-        return node;
-      }
 
-      return { ...node,
-        ...value
-      };
-    });
-    dispatch({
-      nodes,
-      type: 'nodes'
-    });
+function updateNode(cb, currentNodes) {
+  return function (id) {
+    return function (value) {
+      const nodes = currentNodes.map(node => {
+        if (node.id !== id) {
+          return node;
+        }
+
+        return { ...node,
+          ...value
+        };
+      });
+      cb(nodes);
+    };
   };
+}
+/**
+ * removeNode
+ *
+ * @param {Function} cb
+ * @param {Array} currentNodes
+ */
 
-  const handleSave = (cb, nodes, plugins) => {
-    const result = nodes.map(node => {
-      if (!Object.hasOwnProperty.call(node, 'type')) {
-        throw new Error('node type not found');
-      }
 
-      if (!Object.hasOwnProperty.call(plugins, node.type)) {
-        throw new Error(`plugin ${node.type} not found`);
-      }
-
-      return plugins[node.type].serialize(node);
-    });
-    cb(result);
+function removeNode(cb, currentNodes) {
+  return function (id) {
+    return function () {
+      const nodes = [...currentNodes.filter(e => e.id !== id)];
+      cb(nodes);
+    };
   };
+}
+/**
+ * reorder
+ *
+ * @param {Function} cb
+ * @param {Array} currentNodes
+ */
 
-  const remove = useCallback(id => () => {
-    const nodes = [...state.nodes.filter(e => e.id !== id)];
-    dispatch({
-      nodes,
-      type: 'nodes'
-    });
-  }, [state.nodes]);
-  const reorder = useCallback((dragIndex, hoverIndex) => {
-    const nodes = [...state.nodes],
+
+function reorderNodes(cb, currentNodes) {
+  return function (dragIndex, hoverIndex) {
+    const nodes = [...currentNodes],
           dragNode = nodes[dragIndex],
           dropNode = nodes[hoverIndex];
     nodes[hoverIndex] = dragNode;
     nodes[dragIndex] = dropNode;
-    dispatch({
-      nodes,
-      type: 'nodes'
-    });
-  }, [state.nodes]);
-  return [state, reorder, add, remove, handleActive, handleNodeChange, handleSave];
+    cb(nodes);
+  };
+}
+
+export default function useEditor(onChange, currentNodes, initialActiveState = null) {
+  /**
+   * Active Node
+   */
+  const [active, setActive] = useState(initialActiveState);
+
+  const handleActive = (id = null) => () => {
+    setActive(id);
+  };
+  /**
+   * Nodes List
+   */
+
+
+  const add = useCallback(addNode(onChange, currentNodes), [currentNodes]);
+  const remove = useCallback(removeNode(onChange, currentNodes), [currentNodes]);
+  const reorder = useCallback(reorderNodes(onChange, currentNodes), [currentNodes]);
+  const update = useCallback(updateNode(onChange, currentNodes), [currentNodes]);
+  return [active, reorder, add, remove, handleActive, update];
 }

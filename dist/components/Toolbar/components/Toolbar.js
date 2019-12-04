@@ -9,9 +9,9 @@ import SaveButton from './SaveButton';
  */
 
 const Toolbar = ({
+  onPreviewChange,
   onSave,
-  preview,
-  setPreview
+  preview
 }) => React.createElement(MuiToolbar, {
   disableGutters: true,
   variant: "dense"
@@ -21,12 +21,12 @@ const Toolbar = ({
   flex: 1
 }), React.createElement(EditButton, {
   in: !preview,
-  onChange: setPreview
+  onChange: onPreviewChange
 }));
 
 Toolbar.propTypes = {
+  onPreviewChange: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
-  preview: PropTypes.bool.isRequired,
-  setPreview: PropTypes.func.isRequired
+  preview: PropTypes.bool.isRequired
 };
 export default Toolbar;
