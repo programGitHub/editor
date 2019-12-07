@@ -30,7 +30,7 @@ const Mark = ({ attributes, editor, math, node }) => {
           {...attributes}
           math={math}
           renderError={error => (
-            <Typography color="error" component="span">
+            <Typography color="error" component="span" variant="inherit">
               {`${error.name}: ${error.message}`}
             </Typography>
           )}

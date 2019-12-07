@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import Editor, { deserialize, serialize, Toolbar, Viewer } from 'lib';
-import image from 'lib/nodes/Image';
-import paragraph from 'lib/nodes/Paragraph';
+import Editor, {
+  createPlugins,
+  deserialize,
+  serialize,
+  Toolbar,
+  Viewer
+} from 'lib';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -24,10 +28,7 @@ const initialNodes = [
   }
 ];
 
-const plugins = [
-  { plugin: image, type: 'image' },
-  { plugin: paragraph, type: 'paragraph' }
-];
+const plugins = createPlugins();
 
 /**
  * App
@@ -51,7 +52,13 @@ const App = () => {
                 preview={preview}
               />
               {preview ? (
-                <Viewer plugins={plugins} value={value} />
+                <Viewer
+                  blockRenderer={p => (
+                    <Box {...p} marginBottom={5} marginTop={2} />
+                  )}
+                  plugins={plugins}
+                  value={value}
+                />
               ) : (
                 <Editor
                   onChange={newValue => {

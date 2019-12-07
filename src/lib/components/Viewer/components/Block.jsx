@@ -6,7 +6,7 @@ import { ViewerContext } from './Viewer';
 /**
  * Block
  */
-const Block = ({ type, ...props }) => {
+const Block = ({ renderer, type, ...props }) => {
   const plugins = useContext(ViewerContext);
 
   if (
@@ -31,16 +31,22 @@ const Block = ({ type, ...props }) => {
     return null;
   }
 
-  const Viewer = plugin.renderViewer;
+  const Viewer = plugin.renderViewer,
+    Renderer = renderer;
 
   return (
-    <Box marginBottom={2} marginTop={2}>
+    <Renderer>
       <Viewer {...props} />
-    </Box>
+    </Renderer>
   );
 };
 
+Block.defaultProps = {
+  renderer: props => <Box {...props} marginBottom={2} marginTop={2} />
+};
+
 Block.propTypes = {
+  renderer: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired
 };
 

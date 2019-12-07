@@ -6,7 +6,12 @@ import Typography from '@material-ui/core/Typography';
  * Mark
  */
 const Mark = ({ attributes, children }) => (
-  <Typography {...attributes} color="secondary" component="span">
+  <Typography
+    {...attributes}
+    color="secondary"
+    component="span"
+    variant="inherit"
+  >
     {children}
   </Typography>
 );

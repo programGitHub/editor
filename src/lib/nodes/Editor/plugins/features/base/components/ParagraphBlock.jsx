@@ -5,7 +5,11 @@ import Typography from '@material-ui/core/Typography';
 /**
  * ParagraphBlock
  */
-const ParagraphBlock = ({ children }) => <Typography>{children}</Typography>;
+const ParagraphBlock = ({ children }) => (
+  <Typography component="div" variant="inherit">
+    {children}
+  </Typography>
+);
 
 ParagraphBlock.propTypes = {
   children: PropTypes.node.isRequired

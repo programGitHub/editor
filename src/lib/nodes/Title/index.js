@@ -1,7 +1,7 @@
 import React from 'react';
 import { deserialize, serialize } from 'lib/nodes/Editor';
 import Editor from './components/Editor';
-import NotesIcon from '@material-ui/icons/Notes';
+import TitleIcon from '@material-ui/icons/Title';
 import { Value } from 'slate';
 
 export default {
@@ -24,10 +24,10 @@ export default {
     })
   },
   deserialize: ({ value }) => ({ value: deserialize(value) }),
-  menu: <NotesIcon />,
-  menuLabel: 'paragraph',
+  menu: <TitleIcon />,
+  menuLabel: 'title',
   renderEditor: props => <Editor {...props} />,
   renderViewer: props => <Editor {...props} readOnly />,
   serialize: ({ value }) => ({ value: serialize(value) }),
-  type: 'paragraph'
+  type: 'title'
 };

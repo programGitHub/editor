@@ -19,15 +19,28 @@ const Editor = ({ color, onChange, readOnly, value }) => {
   return (
     <Highlight color={color}>
       {!readOnly && (
-        <Menu column={0}>
+        <Menu>
           <MenuBox>
-            <MenuItem onClick={handleColor(colors.DEFAULT)}>
+            <MenuItem
+              color={
+                !color || color === colors.DEFAULT ? 'secondary' : 'default'
+              }
+              onClick={handleColor(colors.DEFAULT)}
+            >
               <CancelIcon />
             </MenuItem>
-            <MenuItem delay={1} onClick={handleColor(colors.INFO)}>
+            <MenuItem
+              color={color === colors.INFO ? 'secondary' : 'default'}
+              delay={1}
+              onClick={handleColor(colors.INFO)}
+            >
               <InfoIcon />
             </MenuItem>
-            <MenuItem delay={2} onClick={handleColor(colors.WARNING)}>
+            <MenuItem
+              color={color === colors.WARNING ? 'secondary' : 'default'}
+              delay={2}
+              onClick={handleColor(colors.WARNING)}
+            >
               <WarningIcon />
             </MenuItem>
           </MenuBox>

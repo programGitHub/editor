@@ -39,6 +39,7 @@ const Editor = ({ onChange, plugins, value }) => {
                 <Node
                   {...node}
                   active={active === node.id}
+                  nodes={value}
                   onChange={onNodeChange(node.id)}
                 />
               </Cell>
@@ -51,17 +52,16 @@ const Editor = ({ onChange, plugins, value }) => {
   );
 };
 
-Editor.defaultProps = {
-  plugins: {}
-};
-
 Editor.propTypes = {
   onChange: PropTypes.func.isRequired,
   plugins: PropTypes.arrayOf(
-    PropTypes.shape({
-      plugin: PropTypes.object.isRequired,
-      type: PropTypes.string.isRequired
-    })
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        plugin: PropTypes.object.isRequired,
+        type: PropTypes.string.isRequired
+      }),
+      PropTypes.string
+    ])
   ).isRequired,
   value: PropTypes.arrayOf(
     PropTypes.shape({

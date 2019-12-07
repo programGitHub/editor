@@ -7,15 +7,21 @@ export const ViewerContext = React.createContext([]);
 /**
  * Viewer
  */
-const Viewer = ({ plugins, value }) => (
+const Viewer = ({ blockRenderer, plugins, value }) => (
   <ViewerContext.Provider value={plugins}>
-    {value.map(({ id, ...blockProps }) => (
-      <Block {...blockProps} key={id} />
+    {value.map(blockProps => (
+      <Block
+        {...blockProps}
+        key={blockProps.id}
+        nodes={value}
+        renderer={blockRenderer}
+      />
     ))}
   </ViewerContext.Provider>
 );
 
 Viewer.propTypes = {
+  blockRenderer: PropTypes.func,
   plugins: PropTypes.array.isRequired,
   value: PropTypes.arrayOf(
     PropTypes.shape({

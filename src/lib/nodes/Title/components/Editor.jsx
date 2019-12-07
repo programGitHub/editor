@@ -1,14 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RichEditor from 'lib/nodes/Editor';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+
+const plugins = ['paragraph'];
 
 /**
  * Editor
  */
 const Editor = ({ onChange, readOnly, value }) => (
-  <Typography component="div" variant="body1">
-    <RichEditor onChange={onChange} readOnly={readOnly} value={value} />
+  <Typography color="textSecondary" component="div" variant="h4">
+    <RichEditor
+      onChange={onChange}
+      plugins={plugins}
+      readOnly={readOnly}
+      value={value}
+    />
   </Typography>
 );
 
