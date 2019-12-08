@@ -25,14 +25,15 @@ const Editor = ({
 
   return React.createElement(Highlight, {
     color: color
-  }, !readOnly && React.createElement(Menu, {
-    column: 0
-  }, React.createElement(MenuBox, null, React.createElement(MenuItem, {
+  }, !readOnly && React.createElement(Menu, null, React.createElement(MenuBox, null, React.createElement(MenuItem, {
+    color: !color || color === colors.DEFAULT ? 'secondary' : 'default',
     onClick: handleColor(colors.DEFAULT)
   }, React.createElement(CancelIcon, null)), React.createElement(MenuItem, {
+    color: color === colors.INFO ? 'secondary' : 'default',
     delay: 1,
     onClick: handleColor(colors.INFO)
   }, React.createElement(InfoIcon, null)), React.createElement(MenuItem, {
+    color: color === colors.WARNING ? 'secondary' : 'default',
     delay: 2,
     onClick: handleColor(colors.WARNING)
   }, React.createElement(WarningIcon, null)))), React.createElement(RichEditor, {

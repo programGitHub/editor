@@ -3,7 +3,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 import React from 'react';
 import { deserialize, serialize } from '../Editor';
 import Editor from './components/Editor';
-import NotesIcon from '@material-ui/icons/Notes';
+import TitleIcon from '@material-ui/icons/Title';
 import { Value } from 'slate';
 export default {
   defaultProps: {
@@ -25,8 +25,8 @@ export default {
   }) => ({
     value: deserialize(value)
   }),
-  menu: React.createElement(NotesIcon, null),
-  menuLabel: 'paragraph',
+  menu: React.createElement(TitleIcon, null),
+  menuLabel: 'title',
   renderEditor: props => React.createElement(Editor, props),
   renderViewer: props => React.createElement(Editor, _extends({}, props, {
     readOnly: true
@@ -36,5 +36,5 @@ export default {
   }) => ({
     value: serialize(value)
   }),
-  type: 'paragraph'
+  type: 'title'
 };

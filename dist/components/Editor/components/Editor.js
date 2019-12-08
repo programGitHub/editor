@@ -43,21 +43,19 @@ const Editor = ({
     onRemove: remove(node.id)
   }, React.createElement(Node, _extends({}, node, {
     active: active === node.id,
+    nodes: value,
     onChange: onNodeChange(node.id)
   }))), React.createElement(Add, {
     onClick: add(i)
   }))))));
 };
 
-Editor.defaultProps = {
-  plugins: {}
-};
 Editor.propTypes = {
   onChange: PropTypes.func.isRequired,
-  plugins: PropTypes.arrayOf(PropTypes.shape({
+  plugins: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.shape({
     plugin: PropTypes.object.isRequired,
     type: PropTypes.string.isRequired
-  })).isRequired,
+  }), PropTypes.string])).isRequired,
   value: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired
   })).isRequired

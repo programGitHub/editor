@@ -12,7 +12,8 @@ const Mark = ({
   children
 }) => React.createElement(Typography, _extends({}, attributes, {
   color: "secondary",
-  component: "span"
+  component: "span",
+  variant: "inherit"
 }), children);
 
 Mark.propTypes = {

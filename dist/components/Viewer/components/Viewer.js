@@ -9,18 +9,19 @@ export const ViewerContext = React.createContext([]);
  */
 
 const Viewer = ({
+  blockRenderer,
   plugins,
   value
 }) => React.createElement(ViewerContext.Provider, {
   value: plugins
-}, value.map(({
-  id,
-  ...blockProps
-}) => React.createElement(Block, _extends({}, blockProps, {
-  key: id
+}, value.map(blockProps => React.createElement(Block, _extends({}, blockProps, {
+  key: blockProps.id,
+  nodes: value,
+  renderer: blockRenderer
 }))));
 
 Viewer.propTypes = {
+  blockRenderer: PropTypes.func,
   plugins: PropTypes.array.isRequired,
   value: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired

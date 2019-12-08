@@ -7,7 +7,10 @@ import Typography from '@material-ui/core/Typography';
 
 const ParagraphBlock = ({
   children
-}) => React.createElement(Typography, null, children);
+}) => React.createElement(Typography, {
+  component: "div",
+  variant: "inherit"
+}, children);
 
 ParagraphBlock.propTypes = {
   children: PropTypes.node.isRequired

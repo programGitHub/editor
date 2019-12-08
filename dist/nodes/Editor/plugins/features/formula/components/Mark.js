@@ -36,7 +36,8 @@ const Mark = ({
     math: math,
     renderError: error => React.createElement(Typography, {
       color: "error",
-      component: "span"
+      component: "span",
+      variant: "inherit"
     }, `${error.name}: ${error.message}`)
   }))), React.createElement(Update, {
     anchorEl: anchorEl,
