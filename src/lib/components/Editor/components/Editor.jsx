@@ -40,6 +40,7 @@ const Editor = ({ onChange, plugins, value }) => {
                   {...node}
                   active={active === node.id}
                   nodes={value}
+                  onCancel={onActive(null)}
                   onChange={onNodeChange(node.id)}
                 />
               </Cell>

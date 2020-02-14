@@ -1,9 +1,7 @@
 import Cell from './components/Cell';
-import MenuBoxImp from './components/MenuBox';
-import MenuItemImp from './components/MenuItem';
-import MenuPortal from './components/MenuPortal';
+import Menu from './components/ActiveMenu';
+import MenuBox from './components/MenuBox';
+import MenuItem from './components/MenuItem';
 
-export const MenuBox = MenuBoxImp;
-export const MenuItem = MenuItemImp;
-export const Menu = MenuPortal;
+export { Menu, MenuBox, MenuItem };
 export default Cell;

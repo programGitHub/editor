@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
-import { CellContext } from './Cell';
-import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 import Fade from '@material-ui/core/Fade';
@@ -35,31 +33,14 @@ const CellMenu = React.forwardRef(
 
     return (
       <Fade in={active || over}>
-        <Box
-          bottom={0}
-          display="flex"
-          flexDirection="row"
-          position="absolute"
-          right={0}
-          top={0}
-        >
-          <Box position="relative">
-            <Box marginRight={-3.75} position="absolute" right={0} top={0}>
-              <Menu ref={refActions}>
-                <MenuItem onClick={onCancel}>
-                  <CloseIcon />
-                </MenuItem>
-              </Menu>
-            </Box>
-          </Box>
-          <CellContext.Provider value={{ in: over && !active }}>
-            <Menu in={over && !active}>
+        <Box bottom={0} display="flex" position="absolute" right={0} top={0}>
+          <Box height="100%" position="relative">
+            <Menu active={!active && over}>
               <MenuBox>
                 <MenuItem ref={ref}>
                   <GamepadIcon />
                 </MenuItem>
                 <MenuItem
-                  delay={1}
                   onMouseDown={onRemoveDown}
                   onMouseLeave={onRemoveLeave}
                   onMouseUp={onRemoveUp}
@@ -68,8 +49,8 @@ const CellMenu = React.forwardRef(
                 </MenuItem>
               </MenuBox>
             </Menu>
-          </CellContext.Provider>
-          <MenuBorder active={active} height={`${ticTac}%`} />
+            <MenuBorder active={active} height={`${ticTac}%`} />
+          </Box>
         </Box>
       </Fade>
     );

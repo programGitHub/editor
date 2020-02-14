@@ -1,0 +1,42 @@
+$duration: 150ms;
+
+@mixin transition {
+  transition: opacity $duration linear, transform $duration ease;
+}
+
+@mixin hidden {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+@mixin visible {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+.cused-menu-item-appear {
+  @include hidden();
+}
+.cused-menu-item-appear-active {
+  @include transition();
+  @include visible();
+}
+
+.cused-menu-item-enter {
+  @include hidden();
+}
+.cused-menu-item-enter-active {
+  @include transition();
+  @include visible();
+}
+.cused-menu-item-exit {
+  @include visible();
+}
+.cused-menu-item-exit-active {
+  @include transition();
+  @include hidden();
+}
+
+.cused-menu-item-exit-done {
+  @include hidden();
+}

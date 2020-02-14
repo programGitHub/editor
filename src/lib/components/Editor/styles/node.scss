@@ -1,0 +1,33 @@
+$duration: 100ms;
+
+@mixin transition {
+  transition: opacity $duration, transform $duration ease-in-out;
+}
+
+@mixin hidden {
+  opacity: 0.6;
+  transform: scale(0.97);
+}
+
+@mixin visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cused-node-switch-enter {
+  @include hidden();
+}
+
+.cused-node-switch-enter-active {
+  @include visible();
+  @include transition();
+}
+
+.cused-node-switch-exit {
+  @include visible();
+}
+
+.cused-node-switch-exit-active {
+  @include hidden();
+  @include transition();
+}

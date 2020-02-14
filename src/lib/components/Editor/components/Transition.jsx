@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
-import '../styles.css';
+import '../styles/nodes.scss';
 
 const DURATION = 300;
 

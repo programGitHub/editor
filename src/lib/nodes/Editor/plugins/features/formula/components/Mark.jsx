@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { InlineMath } from 'react-katex';
+import { Popover } from 'lib/nodes/Editor';
 import Typography from '@material-ui/core/Typography';
 import Update from './Update';
 import 'katex/dist/katex.min.css';
@@ -36,13 +37,13 @@ const Mark = ({ attributes, editor, math, node }) => {
           )}
         />
       </span>
-      <Update
+      <Popover
         anchorEl={anchorEl}
         onClose={handleClose}
-        onUpdate={handleUpdate}
         open={Boolean(anchorEl)}
-        value={math}
-      />
+      >
+        <Update onClose={handleClose} onUpdate={handleUpdate} value={math} />
+      </Popover>
     </React.Fragment>
   );
 };
@@ -50,7 +51,7 @@ const Mark = ({ attributes, editor, math, node }) => {
 Mark.propTypes = {
   attributes: PropTypes.object.isRequired,
   editor: PropTypes.shape({
-    updateLink: PropTypes.func.isRequired
+    updateFormula: PropTypes.func.isRequired
   }).isRequired,
   math: PropTypes.string.isRequired,
   node: PropTypes.shape({

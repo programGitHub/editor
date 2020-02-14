@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 /**
  * Editor
  */
-const Editor = ({ align, onChange, readOnly, src, width }) => {
+const Editor = ({ align, onCancel, onChange, readOnly, src, width }) => {
   const classes = useStyles();
 
   const handleAlign = newAlign => () => {
@@ -36,21 +36,19 @@ const Editor = ({ align, onChange, readOnly, src, width }) => {
 
   return (
     <Box minHeight={100} position="relative">
-      {!readOnly && (
-        <Menu>
-          <MenuBox>
-            <MenuItem onClick={handleAlign('flex-start')}>
-              <FormatLeftIcon />
-            </MenuItem>
-            <MenuItem delay={1} onClick={handleAlign('center')}>
-              <FormatCenterIcon />
-            </MenuItem>
-            <MenuItem delay={2} onClick={handleAlign('flex-end')}>
-              <FormatRightIcon />
-            </MenuItem>
-          </MenuBox>
-        </Menu>
-      )}
+      <Menu active={!readOnly} onCancel={onCancel}>
+        <MenuBox>
+          <MenuItem onClick={handleAlign('flex-start')}>
+            <FormatLeftIcon />
+          </MenuItem>
+          <MenuItem onClick={handleAlign('center')}>
+            <FormatCenterIcon />
+          </MenuItem>
+          <MenuItem onClick={handleAlign('flex-end')}>
+            <FormatRightIcon />
+          </MenuItem>
+        </MenuBox>
+      </Menu>
       <Box className={classes.viewer}>
         <Viewer align={align} src={src} width={width} />
       </Box>
@@ -69,6 +67,7 @@ Editor.defaultProps = {
 
 Editor.propTypes = {
   align: PropTypes.string,
+  onCancel: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   readOnly: PropTypes.bool.isRequired,
   src: PropTypes.string.isRequired,

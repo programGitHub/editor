@@ -22,7 +22,7 @@ const MenuBorder = ({ active, height }) => {
     <Box
       bgcolor={active ? 'secondary.light' : 'primary.light'}
       className={classes.root}
-      height="100%"
+      marginLeft={1}
       position="relative"
       width={10}
       zIndex={20}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Popover } from 'lib/nodes/Editor';
 import Update from './Update';
 
 /**
@@ -25,13 +26,13 @@ const Mark = ({ attributes, children, editor, href, node }) => {
       <a {...attributes} href={href} onClick={handleClick}>
         {children}
       </a>
-      <Update
+      <Popover
         anchorEl={anchorEl}
         onClose={handleClose}
-        onUpdate={handleUpdate}
         open={Boolean(anchorEl)}
-        value={href}
-      />
+      >
+        <Update onClose={handleClose} onUpdate={handleUpdate} value={href} />
+      </Popover>
     </React.Fragment>
   );
 };

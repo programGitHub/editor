@@ -12,17 +12,19 @@
   "name": "editor",
   "version": "0.1.0",
   "dependencies": {
+    "@material-ui/core": "^4.7.0",
     "@material-ui/icons": "^4.5.1",
-    "immutable": "^4.0.0-rc.12",
     "prop-types": "^15.7.2",
+    "react": "^16.12.0",
     "react-dnd": "^9.5.1",
     "react-dnd-html5-backend": "^9.5.1",
+    "react-dom": "^16.12.0",
     "react-katex": "^2.0.2",
     "react-scripts": "3.2.0",
     "react-transition-group": "^4.3.0",
     "shortid": "^2.2.15",
-    "slate": "^0.47.8",
-    "slate-react": "^0.22.9",
+    "slate": "^0.57.1",
+    "slate-react": "^0.57.1",
     "typeface-roboto": "^0.0.75"
   },
   "scripts": {
@@ -50,12 +52,9 @@
   "devDependencies": {
     "@babel/cli": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
-    "cross-env": "^6.0.3"
+    "cross-env": "^6.0.3",
+    "node-sass": "^4.13.0"
   },
-  "peerDependencies": {
-    "@material-ui/core": "^4.7.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
-  },
+  "peerDependencies": {},
   "license": "MIT"
 }

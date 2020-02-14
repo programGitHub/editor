@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { EditorContext } from './Editor';
+import NodeTransition from './NodeTransition';
+import { SwitchTransition } from 'react-transition-group';
 
 /**
  * Node
@@ -38,24 +40,12 @@ const Node = ({ active, type, ...props }) => {
     Viewer = plugin.renderViewer;
 
   return (
-    <>
-      {!active && <Viewer {...props} />}
-      <div style={{ display: active ? 'block' : 'none' }}>
-        <Editor {...props} />
-      </div>
-    </>
+    <SwitchTransition>
+      <NodeTransition key={active ? 'editor' : 'viewer'} in={!active}>
+        {active ? <Editor {...props} /> : <Viewer {...props} />}
+      </NodeTransition>
+    </SwitchTransition>
   );
-
-  // return (
-  //   <>
-  //     <div style={{ display: active ? 'block' : 'none' }}>
-  //       <Editor {...props} />
-  //     </div>
-  //     <div tabIndex="-1" style={{ display: !active ? 'block' : 'none' }}>
-  //       <Viewer {...props} />
-  //     </div>
-  //   </>
-  // );
 };
 
 Node.defaultProps = {

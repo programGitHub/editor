@@ -1,5 +1,5 @@
-import { Value } from 'slate';
+// import { Value } from 'slate';
 
 export default function(value) {
-  return Value.fromJSON(JSON.parse(value));
+  // return Value.fromJSON(JSON.parse(value));
 }

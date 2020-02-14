@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import RichEditor from 'lib/nodes/Editor';
 import Typography from '@material-ui/core/Typography';
 
-const plugins = ['paragraph'];
+const plugins = ['paragraph', 'formula'];
 
 /**
  * Editor

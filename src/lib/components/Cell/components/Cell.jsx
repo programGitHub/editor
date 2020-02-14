@@ -5,8 +5,6 @@ import CellMenu from './CellMenu';
 import { makeStyles } from '@material-ui/core/styles';
 import useCell from '../hooks/useCell';
 
-export const CellContext = React.createContext({ in: false, menu: null });
-
 const useStyles = makeStyles({
   root: ({ active }) => ({
     cursor: active ? 'inherit' : 'pointer'
@@ -43,22 +41,19 @@ const Cell = ({
       onClick={onActive}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      padding={2}
       position="relative"
       ref={ref}
       style={{ opacity: isDragging ? 0 : 1 }}
     >
-      <CellContext.Provider value={{ in: active, menu: refActions }}>
-        {children}
-        <CellMenu
-          active={active}
-          onCancel={onCancel}
-          onRemove={onRemove}
-          over={over}
-          ref={dragHandle}
-          refActions={refActions}
-        />
-      </CellContext.Provider>
+      {children}
+      <CellMenu
+        active={active}
+        onCancel={onCancel}
+        onRemove={onRemove}
+        over={over}
+        ref={dragHandle}
+        refActions={refActions}
+      />
     </Box>
   );
 };

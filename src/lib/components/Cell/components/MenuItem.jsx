@@ -1,47 +1,28 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
+import { CSSTransition } from 'react-transition-group';
 import IconButton from '@material-ui/core/IconButton';
-import { makeStyles } from '@material-ui/core/styles';
-import { CellContext } from './Cell';
-
-const DELAY = 50;
-const DURATION = 250;
-const DURATION_OPACITY = 150;
-
-const useStyles = makeStyles({
-  root: {
-    opacity: 0,
-    transform: 'translateX(30px)',
-    transition: `opacity ${DURATION_OPACITY}ms linear, transform ${DURATION}ms ease`
-  },
-  active: {
-    // be careful to the order, override css
-    opacity: 1,
-    transform: 'translateX(0px)'
-  }
-});
+import { MenuContext } from './Menu';
+import '../styles/menuItem.scss';
 
 /**
  * MenuItem
  */
 const MenuItem = React.forwardRef(({ delay, ...props }, ref) => {
-  const { in: inProp } = useContext(CellContext);
-  const classes = useStyles();
+  const { in: inProp } = useContext(MenuContext);
 
   return (
-    <IconButton
-      {...props}
-      className={clsx(classes.root, {
-        [classes.active]: inProp
-      })}
-      ref={ref}
-      size="small"
-      style={{
-        transitionDelay: `${inProp ? delay * DELAY : 0}ms`,
-        zIndex: inProp ? 10000 : 1000
-      }}
-    />
+    <CSSTransition
+      appear
+      classNames="cused-menu-item"
+      in={inProp}
+      timeout={150 + delay}
+      unmountOnExit
+    >
+      <div style={{ transitionDelay: `${inProp ? delay : 0}ms` }}>
+        <IconButton {...props} ref={ref} size="small" />
+      </div>
+    </CSSTransition>
   );
 });
 
